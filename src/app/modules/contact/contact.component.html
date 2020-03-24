@@ -1,23 +1,54 @@
 <div class="hero-body has-text-centered">
   <!-- form goes here -->
-<form>
+<!-- form goes here -->
+
+<form (ngSubmit)="processForm()" #contactForm ="ngForm">
 
     <!-- name -->
     <div class="field">
-      <input type="text" name="name" class="input" placeholder="Your Name">
+      <label class="label"> Name</label>
+      <input type="text" name="name" class="input" placeholder="Your Name" [(ngModel)]="name"
+        #nameInput="ngModel"
+        required
+      />
+      <div class="help is-error" *ngIf="nameInput.invalid && nameInput.touched">
+          Your name is required
+      </div>
     </div>
   
     <!-- email -->
     <div class="field">
-      <input type="email" name="email" class="input" placeholder="Your Email">
+      <label class="label"> Email Address</label>
+      
+      <input type="email" name="email" class="input" placeholder="Your Email" [(ngModel)]="email"
+      #emailInput="ngModel"
+      required
+      email
+      />
+
+      <div class="help is-error" *ngIf="emailInput.invalid && emailInput.touched">
+        Your email is required
+    </div>
     </div>
   
     <!-- message -->
     <div class="field">
-      <textarea class="textarea" name="message" placeholder="What's on your mind?"></textarea>
+      <label class="label"> Message</label>
+      
+      <textarea class="textarea" name="message" placeholder="What's on your mind?" [(ngModel)]="message"
+      #messageInput="ngModel"
+      required
+      
+      ></textarea>
+      <div class="help is-error" *ngIf="messageInput.invalid && messageInput.touched">
+        Your message is required
+    </div>
     </div>
   
-    <button type="submit" class="button is-danger is-large">Submit</button>
+    <button type="submit" class="button is-danger is-large"
+    [disabled]="contactForm.invalid"    
+    
+    >Submit</button>    
   
   </form>
 </div>
